@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#76a0e4">
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="#0cc9de"
+        android:text="Yo"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button13"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="#0c67de"
+        android:text="Mis Amigos"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button14"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="#0cc9de"
+        android:text="Top 100"
+        android:textColor="#ffffff" />
+
+    <ListView
+        android:id="@+id/listView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button15"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

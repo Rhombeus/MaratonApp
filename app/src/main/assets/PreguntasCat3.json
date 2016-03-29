@@ -1,0 +1,36 @@
+[
+  {
+    "imagen": "",
+    "cat": "Deportes",
+    "preg": "¿Quien jugo la final del mundial Francia 1998?",
+    "op": [
+      {
+        "resp": "Brasil vs Francia"
+      },
+      {
+        "resp": "Alemania vs Francia"
+      },
+      {
+        "resp": "Francia vs Uganda"
+      }
+    ],
+    "corr": 0
+  },
+  {
+    "imagen": "",
+    "cat": "Deportes",
+    "preg": "¿Cuantos metros tiene de largo una cancha de futbol?",
+    "op": [
+      {
+        "resp": "60-90 mts"
+      },
+      {
+        "resp": "120-150 mts"
+      },
+      {
+        "resp": "90-120 mts"
+      }
+    ],
+    "corr": 2
+  }
+]

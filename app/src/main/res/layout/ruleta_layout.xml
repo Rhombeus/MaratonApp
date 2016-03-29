@@ -13,12 +13,13 @@
         android:src="@drawable/imagenruleta" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/girarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:background="#32bd2b"
+        android:onClick="girarBtnOnclick"
         android:text="Girar" />
 </RelativeLayout>

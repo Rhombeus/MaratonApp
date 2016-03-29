@@ -1,0 +1,36 @@
+[
+  {
+    "imagen": "",
+    "cat": "Cine",
+    "preg": "¿En que orden se estrenaron las peliculas de Star Wars?",
+    "op": [
+      {
+        "resp": "I,II,III,IV,V,VI,VII"
+      },
+      {
+        "resp": "VII,VI,V,IV,III,II,I"
+      },
+      {
+        "resp": "IV,V,VI,I,II,III,VII"
+      }
+    ],
+    "corr": 2
+  },
+  {
+    "imagen": "",
+    "cat": "Cine",
+    "preg": "¿Quien dirigio la trilogia del señor de los anillos?",
+    "op": [
+      {
+        "resp": "Peter Jackson"
+      },
+      {
+        "resp": "Michael Jacckson"
+      },
+      {
+        "resp": "JRR Tolken"
+      }
+    ],
+    "corr": 0
+  }
+]

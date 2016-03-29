@@ -1,0 +1,36 @@
+[
+  {
+    "imagen": "",
+    "cat": "Literatura",
+    "preg": "¿Quien escribio la guerra y la paz?",
+    "op": [
+      {
+        "resp": "Leon Tolstoi"
+      },
+      {
+        "resp": "Fiodor Dostoievski"
+      },
+      {
+        "resp": "Alexandre Dumas"
+      }
+    ],
+    "corr": 0
+  },
+  {
+    "imagen": "",
+    "cat": "Historia",
+    "preg": "¿Quien escribio el señor de los anillos?",
+    "op": [
+      {
+        "resp": "Chavelo"
+      },
+      {
+        "resp": "JRR Tolkien"
+      },
+      {
+        "resp": "Guy de Mauppassant"
+      }
+    ],
+    "corr": 1
+  }
+]

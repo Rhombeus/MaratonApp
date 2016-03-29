@@ -5,7 +5,7 @@
     android:background="#76a0e4">
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -18,12 +18,12 @@
         android:textColorHint="#ffffff" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/emailConfirmEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/emailEditText"
         android:ems="10"
         android:hint="Confirmar dirección de correo electrónico"
         android:inputType="textEmailAddress"
@@ -31,23 +31,24 @@
         android:textColorHint="#ffffff" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/usrNameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/emailConfirmEditText"
         android:hint="Nombre de Usuario"
+        android:inputType="textPersonName"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/passEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText5"
+        android:layout_below="@+id/usrNameEditText"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
@@ -55,12 +56,12 @@
         android:textColorHint="#ffffff" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/confirmPassEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText7"
+        android:layout_below="@+id/passEditText"
         android:ems="10"
         android:hint="Confirmar contraseña"
         android:inputType="textPassword"
@@ -68,34 +69,36 @@
         android:textColorHint="#ffffff" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/termsCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText8"
+        android:layout_below="@+id/confirmPassEditText"
         android:checked="false"
         android:text="Acepto condciones"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button12"
+        android:layout_above="@+id/CancelRegBtn"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:background="#32bd2b"
+        android:onClick="registrarseOnclick"
         android:text="Registrarse!" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/CancelRegBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:background="#f60303"
+        android:onClick="cancelRegOnclick"
         android:text="Cancelar" />
 </RelativeLayout>

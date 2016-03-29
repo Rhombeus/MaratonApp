@@ -1,0 +1,36 @@
+[
+  {
+    "imagen": "",
+    "cat": "Musica",
+    "preg": "¿Quien es el cantante de The Rolling Stones?",
+    "op": [
+      {
+        "resp": "Mick Jagger"
+      },
+      {
+        "resp": "Charlie Watts"
+      },
+      {
+        "resp": "Ron Wood"
+      }
+    ],
+    "corr": 0
+  },
+  {
+    "imagen": "",
+    "cat": "Musica",
+    "preg": "¿En que año fue fundada Iron Maiden?",
+    "op": [
+      {
+        "resp": "1974"
+      },
+      {
+        "resp": "1975"
+      },
+      {
+        "resp": "1976"
+      }
+    ],
+    "corr": 1
+  }
+]

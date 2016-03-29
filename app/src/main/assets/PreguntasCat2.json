@@ -1,0 +1,36 @@
+[
+  {
+    "imagen": "",
+    "cat": "Arte",
+    "preg": "¿Quien pinto El Grito?",
+    "op": [
+      {
+        "resp": "Vincent Van Gogh"
+      },
+      {
+        "resp": "Pablo Picasso"
+      },
+      {
+        "resp": "Edvard Munch"
+      }
+    ],
+    "corr": 2
+  },
+  {
+    "imagen": "",
+    "cat": "Arte",
+    "preg": "¿Quien pinto El Guernica?",
+    "op": [
+      {
+        "resp": "Vincent Van Gogh"
+      },
+      {
+        "resp": "Pablo Picasso"
+      },
+      {
+        "resp": "Edvard Munch"
+      }
+    ],
+    "corr": 1
+  }
+]

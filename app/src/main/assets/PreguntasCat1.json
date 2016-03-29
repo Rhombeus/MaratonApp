@@ -1,0 +1,36 @@
+[
+  {
+    "imagen": "",
+    "cat": "Historia",
+    "preg": "¿Cual fue el asesinato que dio comienzo a la primera guerra mundial?",
+    "op": [
+      {
+        "resp": "Chavelo"
+      },
+      {
+        "resp": "El Conde de Montecristo"
+      },
+      {
+        "resp": "Archiduque Francisco Fernando"
+      }
+    ],
+    "corr": 2
+  },
+  {
+    "imagen": "",
+    "cat": "Historia",
+    "preg": "¿Mediante que tratado se hizo oficial la rendicion de alemania en la segunda guerra mundial?",
+    "op": [
+      {
+        "resp": "Tratado de la mancha"
+      },
+      {
+        "resp": "Tratado de versalles"
+      },
+      {
+        "resp": "Tratado de Nuremberg"
+      }
+    ],
+    "corr": 1
+  }
+]

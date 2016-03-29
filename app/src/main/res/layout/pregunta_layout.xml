@@ -20,49 +20,57 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radioButton"
+        <RadioGroup
+            android:id="@+id/opnRadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Respuesta 1"
-            android:textColor="#ffffff" />
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Respuesta 2"
-            android:textColor="#ffffff" />
+            <RadioButton
+                android:id="@+id/opnARadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Respuesta 1"
+                android:textColor="#ffffff" />
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Respuesta 3"
-            android:textColor="#ffffff" />
+            <RadioButton
+                android:id="@+id/opnBRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Respuesta 2"
+                android:textColor="#ffffff" />
+
+            <RadioButton
+                android:id="@+id/opnCRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Respuesta 3"
+                android:textColor="#ffffff" />
+        </RadioGroup>
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/chckAnswerBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#32bd2b"
+            android:onClick="chkAnswerBtnOnclick"
             android:text="Enviar Respuesta"
             android:textColor="#ffffff" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/skipBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f60303"
             android:text="Pasar"
             android:textColor="#ffffff" />
+
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/questionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

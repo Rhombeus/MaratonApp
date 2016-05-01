@@ -4,47 +4,55 @@
     android:layout_height="match_parent"
     android:background="#76a0e4">
 
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/top100Btn" />
+
     <Button
         android:id="@+id/meBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
         android:background="#0cc9de"
         android:onClick="meBtnOnclick"
         android:text="Yo"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/friendsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/meBtn"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
         android:background="#0c67de"
         android:onClick="friendsBtnOnclick"
         android:text="Mis Amigos"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:layout_above="@+id/meBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/top100Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/friendsBtn"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
         android:background="#0cc9de"
         android:onClick="top100BtnOnclick"
         android:text="Top 100"
-        android:textColor="#ffffff" />
-
-    <ListView
-        android:id="@+id/hScoreListView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/top100Btn"
-        android:layout_alignParentStart="true" />
+        android:textColor="#ffffff"
+        android:layout_above="@+id/friendsBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MaratonApp</string>
+    <string name="finalizar">Finalizar juego</string>
 </resources>

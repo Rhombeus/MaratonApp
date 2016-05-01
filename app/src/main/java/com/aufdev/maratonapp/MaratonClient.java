@@ -7,7 +7,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class MaratonClient {
-    private static final String BASE_URL = "http://192.168.15.62/";
+    //private static final String BASE_URL = "http://192.168.15.62/";
+    private static final String BASE_URL ="http://aufdev.com/maraton/";
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

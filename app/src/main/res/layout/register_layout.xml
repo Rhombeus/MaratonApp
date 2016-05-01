@@ -87,7 +87,7 @@
         android:layout_above="@+id/CancelRegBtn"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:background="#32bd2b"
+        android:background="@color/colorCielo"
         android:onClick="registrarseOnclick"
         android:text="Registrarse!" />
 
@@ -98,7 +98,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:background="#f60303"
+        android:background="@color/colorMarino"
         android:onClick="cancelRegOnclick"
         android:text="Cancelar" />
 </RelativeLayout>

@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMenuActivity" />
-        <activity android:name=".RuletaActivity" />
+        <activity android:name=".ruletaActivity" />
         <activity android:name=".PreguntaActivity" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".HighScoreActivity" />

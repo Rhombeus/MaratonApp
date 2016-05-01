@@ -4,32 +4,30 @@
     android:layout_height="match_parent"
     android:background="#76a0e4">
 
-    <ImageView
-        android:id="@+id/imageView4"
+
+    <TextView
+        android:id="@+id/questionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:text="---------Texto de la pregunta -----------"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
         android:layout_alignParentStart="true"
-        android:src="@drawable/question_mark" />
+        android:layout_alignParentEnd="true" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/imageView4"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
-
-        <RadioGroup
+    <RadioGroup
             android:id="@+id/opnRadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/chckAnswerBtn"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/questionTextView">
 
             <RadioButton
                 android:id="@+id/opnARadioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
+                android:checked="true"
                 android:text="Respuesta 1"
                 android:textColor="#ffffff" />
 
@@ -54,29 +52,22 @@
             android:id="@+id/chckAnswerBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#32bd2b"
+            android:background="#FF0CC9DE"
             android:onClick="chkAnswerBtnOnclick"
             android:text="Enviar Respuesta"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:layout_above="@+id/skipBtn"
+            android:layout_alignParentStart="true" />
 
-        <Button
-            android:id="@+id/skipBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#f60303"
-            android:text="Pasar"
-            android:textColor="#ffffff" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/questionTextView"
-        android:layout_width="wrap_content"
+    <Button
+        android:onClick="skipBtnOnclick"
+        android:id="@+id/skipBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="139dp"
-        android:text="---------Texto de la pregunta -----------"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffff" />
+        android:background="#FF0C67DE"
+        android:text="Pasar"
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

@@ -20,9 +20,8 @@ public class MainMenuActivity extends Activity {
     }
 
     public void jugarOnClick(View v) {
-        Intent it = new Intent(this, RuletaActivity.class);
+        Intent it = new Intent(this, ruletaActivity.class);
         this.startActivity(it);
-
     }
 
     public void amigosOnClick(View v) {

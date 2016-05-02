@@ -31,8 +31,7 @@ public class MainMenuActivity extends Activity {
     }
 
     public void buscarOnClick(View v) {
-        Intent it = new Intent(this, AmigosActivity.class);
-        it.putExtra("Tipo", 2);
+        Intent it = new Intent(this, BuscarAmigosActivity.class);
         this.startActivity(it);
     }
 

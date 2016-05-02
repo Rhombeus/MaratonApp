@@ -36,9 +36,7 @@ public class HighScoreActivity extends ListActivity{
         top100 = (Button)findViewById(R.id.top100Btn);
         friends = (Button)findViewById(R.id.friendsBtn);
         me = (Button)findViewById(R.id.meBtn);
-        //lista = (ListView) findViewById(R.id.hScoreListView);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, generateValues());
-        //lista.setAdapter(adapter);
+
         try{
             getTopHighScore();
         } catch (JSONException e) {
@@ -46,10 +44,6 @@ public class HighScoreActivity extends ListActivity{
         }
         System.out.println("***Array** " + array);
         puntajes = new ArrayList<HighScore>();
-        if(array != null) {
-            highscoreAdapter = new highscoreAdapter(this, cargaDatos("tophighscore"));
-            setListAdapter(highscoreAdapter);
-        }
     }
 
     public ArrayList<HighScore> cargaDatos(String nombreServicio) {
@@ -66,7 +60,7 @@ public class HighScoreActivity extends ListActivity{
                     puntajes.add(hs);
                 }
             }else {
-                //Llamar a servicio obtenerTopHighScore (recibir json)
+                //HARDCODEADO
                 InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open(nombreServicio+".json"));
                 bufferedReader = new BufferedReader(inputStreamReader);
                 while (bufferedReader.ready()) {
@@ -75,20 +69,12 @@ public class HighScoreActivity extends ListActivity{
                 JSONObject jsonObject = new JSONObject(stringBuffer.toString());
                 JSONArray jsonArray = jsonObject.getJSONArray("highscores");
 
-
-                //EL BUENO
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObjectDos = jsonArray.getJSONObject(i);
                     System.out.println("jsonObject "+jsonArray.getJSONObject(i));
                     HighScore hs = new HighScore(jsonObjectDos.getString("nombre"), jsonObjectDos.getInt("score"));
                     puntajes.add(hs);
                 }
-                /*for (int i = 0; i < array.length(); i++) {
-                    JSONObject jsonObjectDos = array.getJSONObject(i);
-                    System.out.println("jsonObject");
-                    HighScore hs = new HighScore(jsonObjectDos.getString("username"), Integer.parseInt(jsonObjectDos.getString("score")));
-                    puntajes.add(hs);
-                }*/
             }
 
         } catch (Exception ex) {
@@ -98,23 +84,7 @@ public class HighScoreActivity extends ListActivity{
     }
 
 
-    //Conexion a servicio
-    public void getTopHighScore() throws JSONException {
-        MaratonClient.get("users/highscore", null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("**JSONOBJ HS** "+response);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-                System.out.println("**JSONARRAY HS** "+timeline);
-                array=timeline;
-
-            }
-
-        });
-    }
+    //FALTA OBTENER LISTA DE AMIGOS A PARTIR DEL USUARIO
     public void getFriendsHighScore() throws JSONException {
         MaratonClient.get("friends/friendshighscore.json", null, new JsonHttpResponseHandler() {
             @Override
@@ -137,7 +107,7 @@ public class HighScoreActivity extends ListActivity{
             }
         });
     }
-    //  Conexión con el servidor
+    //FALTA OBTENER PUNTAJE DEL USUARIO
     public void getHighScore() throws JSONException {
         MaratonClient.get("users/mehighscore.json", null, new JsonHttpResponseHandler() {
             @Override
@@ -161,7 +131,6 @@ public class HighScoreActivity extends ListActivity{
         });
     }
 
-    //Acción Botones
 
     public void meBtnOnclick(View v) throws JSONException {
         top100.setBackgroundColor(getResources().getColor(R.color.colorCielo));
@@ -189,26 +158,32 @@ public class HighScoreActivity extends ListActivity{
         System.out.println("Click Friends!!");
     }
 
+
+    //TOP 100 LISTO!!
+    //Conexion a servicio TOP100
+    public void getTopHighScore() throws JSONException {
+        MaratonClient.get("users/highscore", null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+                System.out.println("**JSONARRAY HS** " + timeline);
+                puntajes.clear();
+                array = timeline;
+                highscoreAdapter = new highscoreAdapter(HighScoreActivity.this, cargaDatos("tophighscore"));
+                setListAdapter(highscoreAdapter);
+
+            }
+
+        });
+    }
+
     public void top100BtnOnclick(View v) throws JSONException{
         top100.setBackgroundColor(getResources().getColor(R.color.colorMarino));
         friends.setBackgroundColor(getResources().getColor(R.color.colorCielo));
         me.setBackgroundColor(getResources().getColor(R.color.colorCielo));
-        //getTopHighScore();
-        //highscoreAdapter = new highscoreAdapter(this, puntajes);
         try{
             getTopHighScore();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-        if(array != null) {
-            if(puntajes != null) {
-                puntajes.clear();
-            }
-            System.out.println("***ArrayTop** "+array);
-            highscoreAdapter = new highscoreAdapter(this, cargaDatos("tophighscore"));
-            highscoreAdapter.notifyDataSetChanged();
-            setListAdapter(highscoreAdapter);
-            System.out.println("Click HS!!");
         }
     }
 }

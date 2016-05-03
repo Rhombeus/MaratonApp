@@ -1,5 +1,6 @@
 package com.aufdev.maratonapp;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +9,20 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import cz.msebera.android.httpclient.Header;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final Pattern EMAIL_REGEX = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
     private EditText emailEditText, emailConfirmEditText, usrNameEditText, passEditText, confirmPassEditText;
     private CheckBox termsCheckBox;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,10 @@ public class RegisterActivity extends AppCompatActivity {
         passEditText = (EditText) findViewById(R.id.passEditText);
         confirmPassEditText = (EditText) findViewById(R.id.confirmPassEditText);
         termsCheckBox = (CheckBox) findViewById(R.id.termsCheckBox);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading data...");
+        progressDialog.show();
     }
 
     public void cancelRegOnclick(View v) {
@@ -35,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void registrarseOnclick(View v) {
         if (validateFields()) {
-            SharedPreferences.Editor usrEditor = getApplicationContext().getSharedPreferences(usrNameEditText.getText().toString(), 0).edit();
+            /*SharedPreferences.Editor usrEditor = getApplicationContext().getSharedPreferences(usrNameEditText.getText().toString(), 0).edit();
             usrEditor.putString(AppConstants.USR_NAME_KEY, usrNameEditText.getText().toString());
             usrEditor.putString(AppConstants.USR_MAIL_KEY, emailEditText.getText().toString());
             usrEditor.putString(AppConstants.USR_PASS_KEY, PasswordEncryptor.getInstance().encrypt(passEditText.getText().toString()));
@@ -48,7 +59,34 @@ public class RegisterActivity extends AppCompatActivity {
             usrListEditor.putInt(usrNameEditText.getText().toString(), 0);
             usrListEditor.commit();
             Toast.makeText(this, "Se ha registrado exitosamente", Toast.LENGTH_LONG).show();
-            this.finish();
+            this.finish();*/
+            RequestParams params=new RequestParams();
+            params.add("data[User][id]","");
+            params.add("data[User][username]",usrNameEditText.getText().toString());
+            params.add("data[User][password]",passEditText.getText().toString());
+            params.add("data[User][email]",emailEditText.getText().toString());
+            params.add("data[User][score]","0");
+            params.add("data[User][active]","0");
+            params.add("data[User][active]","1");
+            params.add("data[UserFriendship][UserFriendship]","");
+            params.add("data[UserFriendship][UserFriendship][]","");
+            params.add("data[UserGame][UserGame]","");
+            params.add("data[UserGame][UserGame][]","");
+            MaratonClient.post("users/add", params, new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    System.out.println("Error");
+                    Toast.makeText(RegisterActivity.this, "Falló la conexión", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    System.out.println(responseString);
+                    Toast.makeText(RegisterActivity.this, "Se ha registrado exitosamente", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                    RegisterActivity.this.finish();
+                }
+            });
 
         }
 

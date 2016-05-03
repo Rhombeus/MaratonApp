@@ -1,7 +1,11 @@
 package com.aufdev.maratonapp;
 
+import android.app.AlertDialog;
+import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,72 +21,78 @@ import com.loopj.android.http.*;
 
 import cz.msebera.android.httpclient.Header;
 
-public class AmigosActivity extends AppCompatActivity {
+public class AmigosActivity extends ListActivity {
     private ListView lista;
-    private ArrayAdapter<String> adapter;
-    ArrayList<String>friends = new ArrayList<>();
-
+    private AmigosAdapter amigosAdapter;
+    private Usuario usuario;
+    private static ArrayList<Usuario> usuarios ;
+    private JSONArray array;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.amigos_layout);
-        lista = (ListView) findViewById(R.id.amigosListView);
-        try {
+
+        try{
             getFriends();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, generateValues(getIntent().getIntExtra("Tipo", 1)));*/
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, friends);
-        lista.setAdapter(adapter);
+        usuarios = new ArrayList<Usuario>();
     }
 
-    /*private String[] generateValues(int tipo) {
-        String[] ret;
-        if (tipo == 1) {
-            Set<String> usrs = getApplicationContext().getSharedPreferences(AppConstants.currentUser, 0).getStringSet(AppConstants.USR_FRIENDS_KEY, new HashSet<String>());
-            ret = new String[usrs.size()];
-            int i = 0;
-            for (String s : usrs) {
-                ret[i] = s + ":  " + getApplicationContext().getSharedPreferences(AppConstants.GLOBAL, 0).getInt(s, 0);
-                i++;
+    public ArrayList<Usuario> cargaDatos() {
+        try {
+            System.out.println("***Array** " + array);
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObjectDos = array.getJSONObject(i);
+                JSONObject inner = jsonObjectDos.getJSONObject("users");
+                System.out.println("**jsonObject " + inner);
+                Usuario us = new Usuario(inner.getString("username"), inner.getString("email"), Integer.parseInt(inner.getString("score")), inner.getString("id"));
+                usuarios.add(us);
             }
-        } else {
-            Set<String> usrs = getApplicationContext().getSharedPreferences(AppConstants.GLOBAL, 0).getStringSet(AppConstants.GLOBAL_USRS, new HashSet<String>());
-            ret = new String[usrs.size()];
-            int i = 0;
-            for (String s : usrs) {
-                ret[i] = s + ":  " + getApplicationContext().getSharedPreferences(AppConstants.GLOBAL, 0).getInt(s, 0);
-                i++;
-            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return ret;
-    }*/
+        return usuarios;
+    }
 
-    //SERVICIO AMIGOS
+    //FALTA AGREGAR USUARIO A LA BASE DE DATOS
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        usuario = amigosAdapter.getItem(position);
+        new AlertDialog.Builder(this)
+                .setTitle("Agregar Amigo")
+                .setMessage("¿Deseas iniciar una partida?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // AGREGAR USUARIO A LA BD
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+
+    }
+
+    //Conexion a servicio
     public void getFriends() throws JSONException {
-        MaratonClient.get("friends/friends.json", null, new JsonHttpResponseHandler() {
+        MaratonClient.get("users/json", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                // If the response is JSONObject instead of expected JSONArray
-                try {
-                    JSONArray jsonArray = response.getJSONArray("friends");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObjectDos = jsonArray.getJSONObject(i);
-                        friends.add(jsonObjectDos.getString("nombre"));
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                System.out.println("**JSONOBJ HS** "+response);
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-
+                System.out.println("**JSONARRAY HS** "+timeline);
+                array=timeline;
+                amigosAdapter = new AmigosAdapter(AmigosActivity.this, cargaDatos());
+                setListAdapter(amigosAdapter);
             }
+
         });
     }
 }

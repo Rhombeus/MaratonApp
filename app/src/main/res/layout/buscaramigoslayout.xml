@@ -38,4 +38,22 @@
         android:layout_below="@+id/correo"
         android:layout_toEndOf="@+id/imageView5" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ID: "
+        android:id="@+id/textView2"
+        android:layout_below="@+id/score"
+        android:layout_toEndOf="@+id/imageView5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/id_usuario"
+        android:layout_below="@+id/score"
+        android:layout_toEndOf="@+id/textView2" />
+
 </RelativeLayout>

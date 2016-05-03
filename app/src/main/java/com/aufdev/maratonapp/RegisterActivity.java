@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data...");
-        progressDialog.show();
+        //progressDialog.show();
     }
 
     public void cancelRegOnclick(View v) {
@@ -46,7 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void registrarseOnclick(View v) {
         if (validateFields()) {
-            /*SharedPreferences.Editor usrEditor = getApplicationContext().getSharedPreferences(usrNameEditText.getText().toString(), 0).edit();
+            progressDialog.show();
+            SharedPreferences.Editor usrEditor = getApplicationContext().getSharedPreferences(usrNameEditText.getText().toString(), 0).edit();
             usrEditor.putString(AppConstants.USR_NAME_KEY, usrNameEditText.getText().toString());
             usrEditor.putString(AppConstants.USR_MAIL_KEY, emailEditText.getText().toString());
             usrEditor.putString(AppConstants.USR_PASS_KEY, PasswordEncryptor.getInstance().encrypt(passEditText.getText().toString()));
@@ -58,8 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
             usrListEditor.putStringSet(AppConstants.GLOBAL_USRS, usrs);
             usrListEditor.putInt(usrNameEditText.getText().toString(), 0);
             usrListEditor.commit();
-            Toast.makeText(this, "Se ha registrado exitosamente", Toast.LENGTH_LONG).show();
-            this.finish();*/
+            //Toast.makeText(this, "Se ha registrado exitosamente", Toast.LENGTH_LONG).show();
+            //this.finish();
             RequestParams params=new RequestParams();
             params.add("data[User][id]","");
             params.add("data[User][username]",usrNameEditText.getText().toString());

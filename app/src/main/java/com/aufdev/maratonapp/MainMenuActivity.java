@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainMenuActivity extends Activity {
     private Button jugar, amigos, buscar, hScore;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,10 @@ public class MainMenuActivity extends Activity {
         amigos = (Button) findViewById(R.id.amigosBtn);
         buscar = (Button) findViewById(R.id.buscarBtn);
         hScore = (Button) findViewById(R.id.hScoreBtn);
+
+        ///----
+        username = getIntent().getStringExtra("username");
+        System.out.println("***UserName: "+username);
     }
 
     public void jugarOnClick(View v) {

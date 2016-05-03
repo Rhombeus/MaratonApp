@@ -28,10 +28,12 @@ public class LogInActivity extends AppCompatActivity {
         if (chckCredentials()) {
             AppConstants.currentUser = uName.getText().toString();
             Intent it = new Intent(this, MainMenuActivity.class);
+            it.putExtra("username", uName.getText().toString());
             startActivity(it);
         } else {
             Toast.makeText(this, "Usuario o Contraseña Invalidos", Toast.LENGTH_LONG).show();
         }
+
     }
 
     public void registerOnclick(View v) {

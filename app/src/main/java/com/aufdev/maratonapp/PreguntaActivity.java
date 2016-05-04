@@ -1,6 +1,7 @@
 package com.aufdev.maratonapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,6 +30,7 @@ public class PreguntaActivity extends AppCompatActivity {
     private RadioButton opnARadioButton, opnBRadioButton, opnCRadioButton;
     private RadioGroup opnRadioGroup;
     private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,15 +121,28 @@ public class PreguntaActivity extends AppCompatActivity {
         }
         if (pregunta.accion(resp)) {
             Toast.makeText(this, "Correcto!", Toast.LENGTH_LONG).show();
-            finish();
+            this.custom_end_activity();
         } else {
             Toast.makeText(this, "Incorrecto", Toast.LENGTH_LONG).show();
-            finish();
+            this.custom_end_activity();
         }
     }
 
+    //Método que debe utilizarse en lugar de "finish()", ya que actualiza el puntaje en el servidor
+    public void custom_end_activity()
+    {
+        int puntos = 0;
+        //id_usuario, id_pregunta, #respuesta, id_juego -> query
+        MaratonClient client = new MaratonClient();
+
+        //dentro del onSuccess()
+            //actualizar puntos
+            //setResult(ruletaActivity.SCORE_UPDATE_REQUEST, puntos);
+            //finish(); -> dentro del onSuccess()
+    }
+
     public void skipBtnOnclick(View v) {
-        finish();
+        custom_end_activity();
         System.out.println("cllick!!");
     }
 

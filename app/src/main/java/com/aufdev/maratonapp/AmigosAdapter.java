@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
@@ -35,7 +33,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
         TextView correo = (TextView)convertView.findViewById(R.id.correo);
         correo.setText(usuario.getCorreo());
 
-        TextView score = (TextView)convertView.findViewById(R.id.score);
+        TextView score = (TextView)convertView.findViewById(R.id.scoreamigo);
         score.setText(Integer.toString(usuario.getScore()));
 
         TextView id = (TextView)convertView.findViewById(R.id.id_usuario);

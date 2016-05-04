@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:text="Maraton App Nombre"
+        android:text="Maratón"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 </RelativeLayout>

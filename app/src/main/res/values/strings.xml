@@ -4,4 +4,8 @@
     <string name="nombre">Nombre</string>
     <string name="correo">Correo</string>
     <string name="score">Score</string>
+    <string name="juegos">Juegos</string>
+    <string name="vs">VS: </string>
+    <string name="scoreamigo">Puntaje Amigo:</string>
+    <string name="tupuntaje">Tu puntaje:</string>
 </resources>

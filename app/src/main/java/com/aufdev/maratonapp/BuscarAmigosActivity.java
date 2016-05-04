@@ -61,8 +61,8 @@ public class BuscarAmigosActivity extends ListActivity {
                 System.out.println("**jsonObject " + inner);
                 Usuario us = new Usuario(inner.getString("username"), inner.getString("email"), Integer.parseInt(inner.getString("score")), inner.getString("id"));
                 usuarios.add(us);
-                if(us.getNombre().equals(username)){
-                    id_usuario = us.getId();
+                if(inner.getString("username").equals(username)){
+                    id_usuario = inner.getString("id");
                 }
             }
         }catch (Exception ex) {
@@ -109,11 +109,12 @@ public class BuscarAmigosActivity extends ListActivity {
 
     public void addFriend(String id_friend){
         RequestParams params=new RequestParams();
-        params.add("data[Friend][id]",id_friend); //amigo
-        params.add("data[Friend][user_from]",id_usuario);//usuario actual
-        System.out.println("**Usuario:" + usuario);
+        params.add("data[Friend][id]","");
+        params.add("data[Friend][user_to]", id_friend);
+        params.add("data[Friend][user_from]", id_usuario);//usuario actual
+        System.out.println("**Usuario:" + id_usuario);
         System.out.println("**Amigo:" + id_friend);
-        MaratonClient.post("users/friends/add", params, new TextHttpResponseHandler() {
+        MaratonClient.post("friends/add", params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 System.out.println("Error");

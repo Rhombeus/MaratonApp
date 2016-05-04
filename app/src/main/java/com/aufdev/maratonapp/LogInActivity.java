@@ -8,11 +8,24 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
+
 public class LogInActivity extends AppCompatActivity {
 
 
     String m_androidId;
     private EditText uName, pwd;
+    private String id_u;
+    private JSONArray array;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +35,21 @@ public class LogInActivity extends AppCompatActivity {
         uName = (EditText) findViewById(R.id.uNameEditText);
         pwd = (EditText) findViewById(R.id.pwdEditText);
         System.out.println(m_androidId);
+
+        try{
+            getUsers();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loginOnclick(View view) {
         if (chckCredentials()) {
             AppConstants.currentUser = uName.getText().toString();
             Intent it = new Intent(this, MainMenuActivity.class);
+            it.putExtra("userid", id_u);
             it.putExtra("username", uName.getText().toString());
+            System.out.println("-----LIn:"+id_u);
             startActivity(it);
         } else {
             Toast.makeText(this, "Usuario o Contraseña Invalidos", Toast.LENGTH_LONG).show();
@@ -49,6 +70,7 @@ public class LogInActivity extends AppCompatActivity {
     public boolean chckCredentials() {
         String hash = getApplicationContext().getSharedPreferences(uName.getText().toString(), 0).getString(AppConstants.USR_PASS_KEY, null);
         PasswordEncryptor e = PasswordEncryptor.getInstance();
+        cargaDatos();
         return PasswordEncryptor.getInstance().check(pwd.getText().toString(), hash);
          /* MaratonClient.get("cake/view_workshops", null, new JsonHttpResponseHandler() {
             @Override
@@ -71,5 +93,34 @@ public class LogInActivity extends AppCompatActivity {
         });*/
     }
 
+    //Conexion a servicio
+    public void getUsers() throws JSONException {
+        MaratonClient.get("users/json", null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+                array = timeline;
+
+
+            }
+
+        });
+    }
+
+    public void cargaDatos() {
+        try {
+            System.out.println("***Array** " + array);
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObjectDos = array.getJSONObject(i);
+                JSONObject inner = jsonObjectDos.getJSONObject("users");
+                //System.out.println("**jsonObject " + inner);
+                if(inner.getString("username").equals(uName.getText().toString())){
+                    id_u = inner.getString("id");
+                    break;
+                }
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }

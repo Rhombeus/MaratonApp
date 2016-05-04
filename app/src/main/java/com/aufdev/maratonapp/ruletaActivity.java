@@ -20,6 +20,8 @@ public class ruletaActivity extends AppCompatActivity {
     private Button girar;
     private Button finalizar;
     private int arr[] = {400, 335, 270, 205, 140, 75};
+    private Juego juego;
+    public static final int SCORE_UPDATE_REQUEST = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,17 @@ public class ruletaActivity extends AppCompatActivity {
         ruleta = (ImageView)findViewById(R.id.imgRuleta);
         girar = (Button) findViewById(R.id.girarBtn);
         finalizar = (Button) findViewById(R.id.finalizarbtn);
+
+        Intent it = this.getIntent();
+
+        String scorep1 = it.getStringExtra("scorep1");
+        String scorep2 = it.getStringExtra("scorep2");
+        String score_ignorancia = it.getStringExtra("score_ignorancia");
+        String player1 = it.getStringExtra("player1");
+        String player2 = it.getStringExtra("player2");
+        String turno = it.getStringExtra("turno");
+
+        juego = new Juego(player1, player2, scorep1, scorep2, score_ignorancia, turno);
     }
 
     public void girarBtnOnclick(View v) {
@@ -56,11 +69,29 @@ public class ruletaActivity extends AppCompatActivity {
                 finalizar.setEnabled(true);
                 Intent it = new Intent(ruletaActivity.this, PreguntaActivity.class);
                 it.putExtra("Categoria", categoria);
-                startActivity(it);
+                startActivityForResult(it, SCORE_UPDATE_REQUEST); //startActivityForResult
                 //RuletaActivity.this.finish();
             }
         }, 3000);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(requestCode == SCORE_UPDATE_REQUEST)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                //TODO : Checar qué jugador respondió, de manera que se actualice el score del jugador correcto
+                //Por el momento, solamente se actualiza el de player1. Se compara el
+                int puntos = 0; //En lugar de int, JSONObject y de ahí jalas todo.
+                data.getIntExtra("puntos", puntos);
+                juego.setScorep1("" + (Integer.parseInt(juego.getScorep1()) +  puntos) );
+
+
+            }
+        }
     }
 
     public void finalizarBtn(View v){

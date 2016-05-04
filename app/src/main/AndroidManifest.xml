@@ -25,7 +25,8 @@
         <activity android:name=".HighScoreActivity" />
         <activity android:name=".AmigosActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".BuscarAmigosActivity"></activity>
+        <activity android:name=".BuscarAmigosActivity" />
+        <activity android:name=".JuegosActivity"></activity>
     </application>
 
 </manifest>

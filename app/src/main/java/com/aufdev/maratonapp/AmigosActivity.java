@@ -27,10 +27,13 @@ public class AmigosActivity extends ListActivity {
     private Usuario usuario;
     private static ArrayList<Usuario> usuarios ;
     private JSONArray array;
+
+    private String id_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.amigos_layout);
+        id_user = getIntent().getStringExtra("userid");
 
         try{
             getFriends();
@@ -79,7 +82,7 @@ public class AmigosActivity extends ListActivity {
 
     //Conexion a servicio
     public void getFriends() throws JSONException {
-        MaratonClient.get("users/json", null, new JsonHttpResponseHandler() {
+        MaratonClient.get("friends/json/"+id_user, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 System.out.println("**JSONOBJ HS** "+response);

@@ -29,6 +29,8 @@ public class HighScoreActivity extends ListActivity{
     private Button friends;
     private Button me;
 
+    private String id_u;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class HighScoreActivity extends ListActivity{
         top100 = (Button)findViewById(R.id.top100Btn);
         friends = (Button)findViewById(R.id.friendsBtn);
         me = (Button)findViewById(R.id.meBtn);
+        id_u = getIntent().getStringExtra("userid");
 
         try{
             getTopHighScore();
@@ -60,7 +63,15 @@ public class HighScoreActivity extends ListActivity{
                     puntajes.add(hs);
                 }
             }else {
-                //HARDCODEADO
+               if(nombreServicio.equals("friendshighscore")){
+                   for (int i = 0; i < array.length(); i++) {
+                       JSONObject jsonObjectDos = array.getJSONObject(i);
+                       JSONObject inner = jsonObjectDos.getJSONObject("users");
+                       System.out.println("**jsonObject "+inner);
+                       HighScore hs = new HighScore(inner.getString("username"), Integer.parseInt(inner.getString("score")));
+                       puntajes.add(hs);
+                   }
+               }
                 InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open(nombreServicio+".json"));
                 bufferedReader = new BufferedReader(inputStreamReader);
                 while (bufferedReader.ready()) {
@@ -152,10 +163,22 @@ public class HighScoreActivity extends ListActivity{
         puntajes.clear();
         //getFriendsHighScore();
         //highscoreAdapter = new highscoreAdapter(this, puntajes);
-        highscoreAdapter = new highscoreAdapter(this, cargaDatos("friendshighscore"));
+        /*highscoreAdapter = new highscoreAdapter(this, cargaDatos("friendshighscore"));
         highscoreAdapter.notifyDataSetChanged();
         setListAdapter(highscoreAdapter);
-        System.out.println("Click Friends!!");
+        System.out.println("Click Friends!!");*/
+        MaratonClient.get("friends/json/"+id_u, null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+                System.out.println("**JSONARRAY HS** " + timeline);
+                puntajes.clear();
+                array = timeline;
+                highscoreAdapter = new highscoreAdapter(HighScoreActivity.this, cargaDatos("tophighscore"));
+                setListAdapter(highscoreAdapter);
+
+            }
+
+        });
     }
 
 

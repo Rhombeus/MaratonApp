@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="95dp"
+        android:id="@+id/imageView6"
+        android:src="@drawable/juegoicon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/turno" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/vs"
+        android:id="@+id/textView4"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/oponenteTV"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/scoreamigo"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView4"
+        android:layout_toEndOf="@+id/imageView6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/scoreamigo"
+        android:layout_below="@+id/oponenteTV"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textView5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tupuntaje"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/textView5"
+        android:layout_toEndOf="@+id/imageView6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/scoreuser"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textView6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ignorancia: "
+        android:id="@+id/textView8"
+        android:layout_below="@+id/textView6"
+        android:layout_toEndOf="@+id/imageView6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/scoreignorancia"
+        android:layout_below="@+id/scoreuser"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textView8" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Turno"
+        android:id="@+id/turno"
+        android:layout_below="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

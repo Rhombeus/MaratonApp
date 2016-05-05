@@ -27,6 +27,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".BuscarAmigosActivity" />
         <activity android:name=".JuegosActivity" />
+        <activity android:name=".JuegoActivity" />
     </application>
 
 </manifest>

@@ -35,7 +35,7 @@ public class MainMenuActivity extends Activity {
         }else{
             Toast.makeText(this, "No tienes juegos :( invita a un amigo a jugar", Toast.LENGTH_LONG).show();
         }*/
-        Intent it = new Intent(this, JuegosActivity.class);
+        Intent it = new Intent(this, JuegoActivity.class);
         it.putExtra("userid", userid);
         this.startActivity(it);
     }

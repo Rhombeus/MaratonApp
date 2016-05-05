@@ -33,12 +33,12 @@ public class ruletaActivity extends AppCompatActivity {
 
         Intent it = this.getIntent();
 
-        String scorep1 = it.getStringExtra("scorep1");
-        String scorep2 = it.getStringExtra("scorep2");
-        String score_ignorancia = it.getStringExtra("score_ignorancia");
+        int scorep1 = it.getIntExtra("scorep1", 0);
+        int scorep2 = it.getIntExtra("scorep2", 0);
+        int score_ignorancia = it.getIntExtra("score_ignorancia", 0);
         String player1 = it.getStringExtra("player1");
         String player2 = it.getStringExtra("player2");
-        String turno = it.getStringExtra("turno");
+        Boolean turno = it.getBooleanExtra("turno", false);
 
         juego = new Juego(player1, player2, scorep1, scorep2, score_ignorancia, turno);
     }
@@ -87,7 +87,7 @@ public class ruletaActivity extends AppCompatActivity {
                 //Por el momento, solamente se actualiza el de player1. Se compara el
                 int puntos = 0; //En lugar de int, JSONObject y de ahí jalas todo.
                 data.getIntExtra("puntos", puntos);
-                juego.setScorep1("" + (Integer.parseInt(juego.getScorep1()) +  puntos) );
+                juego.setScorep1(juego.getScorep1() +  puntos);
 
 
             }

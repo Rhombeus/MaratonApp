@@ -32,14 +32,14 @@ public View getView(int position, View convertView, ViewGroup parent) {
         vs.setText(juego.getPlayer1());
 
         TextView score_amigo = (TextView)convertView.findViewById(R.id.scoreamigo);
-        score_amigo.setText(juego.getScorep2());
+        score_amigo.setText(String.valueOf(juego.getScorep2()));
 
         TextView score_usuario = (TextView)convertView.findViewById(R.id.scoreuser);
-        score_usuario.setText(juego.getScorep1());
+        score_usuario.setText(String.valueOf(juego.getScorep1()));
 
         TextView turno = (TextView)convertView.findViewById(R.id.turno);
-        turno.setText(juego.getTurno());
+        turno.setText(String.valueOf(juego.getTurno()));
 
         return convertView;
-        }
-        }
+}
+}

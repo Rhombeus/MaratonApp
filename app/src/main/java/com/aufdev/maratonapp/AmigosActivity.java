@@ -91,8 +91,9 @@ public class AmigosActivity extends ListActivity {
     public void getFriends() throws JSONException {
         MaratonClient.get("friends/json/" + id_user, null, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("**JSONOBJ HS** " + response);
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                System.out.println("-------------sc"+statusCode);
+                System.out.println("friends/json/" + id_user);
             }
 
             @Override

@@ -124,6 +124,7 @@ public class PreguntaActivity extends AppCompatActivity {
 
     public void chkAnswerBtnOnclick(View v) {
         int resp = 0;
+
         switch (opnRadioGroup.getCheckedRadioButtonId()) {
             case R.id.opnARadioButton:
                 resp = 0;
@@ -135,8 +136,9 @@ public class PreguntaActivity extends AppCompatActivity {
                 resp = 2;
                 break;
         }
+        indice_respuesta=""+(resp+1);
 
-        if (pregunta.accion(resp)) {
+        if (pregunta.accion(resp+1)) {
             Toast.makeText(this, "Correcto!", Toast.LENGTH_LONG).show();
             this.custom_end_activity();
         } else {
@@ -148,8 +150,7 @@ public class PreguntaActivity extends AppCompatActivity {
     //Método que debe utilizarse en lugar de "finish()", ya que actualiza el puntaje en el servidor
     public void custom_end_activity()
     {
-        int puntos = 0;
-        //id_usuario, id_pregunta, #respuesta, id_juego -> query
+        final int puntos = 0;
         MaratonClient.get("questions/validateAnswer/" + id_user + "/" + id_pregunta + "/" + indice_respuesta + "/" + id_juego, null, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -161,16 +162,36 @@ public class PreguntaActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                System.out.println("questions/validateAnswer/" + id_user + "/" + id_pregunta + "/" + indice_respuesta + "/" + id_juego);
                 System.out.println("------------------------------"+responseString);
-                if(responseString.equals("true")){
-
+                Intent it=new Intent();
+                if(responseString.trim().equals("true")){
+                    it.putExtra("puntos",1);
+                    setResult(RESULT_OK,it);
                 }else{
-
+                    it.putExtra("puntos",0);
+                    setResult(RESULT_OK,it);
                 }
+
+               finish();
             }
         });
 
+        /*
+        //Método que debe utilizarse en lugar de "finish()", ya que actualiza el puntaje en el servidor
+    public void custom_end_activity()
+    {
+        int puntos = 0;
+        //id_usuario, id_pregunta, #respuesta, id_juego -> query
+        MaratonClient client = new MaratonClient();
 
+        //dentro del onSuccess()
+            //actualizar puntos
+            //;
+            //finish(); -> dentro del onSuccess()
+    }
+
+         */
     }
 
     public void skipBtnOnclick(View v) {

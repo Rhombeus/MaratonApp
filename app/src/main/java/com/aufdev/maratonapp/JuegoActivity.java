@@ -45,6 +45,18 @@ public class JuegoActivity extends ListActivity {
         juegos = new ArrayList<Juego>();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargaDatos();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        cargaDatos();
+    }
+
     public ArrayList<Juego> cargaDatos() {
         try {
             System.out.println("***Array** " + array);
@@ -55,7 +67,7 @@ public class JuegoActivity extends ListActivity {
                 JSONObject innerP2 = jsonObjectDos.getJSONObject("player2");
                 Juego j = new Juego(innerGame.getString("id"),innerP1.getString("username"), innerP2.getString("username"), Integer.parseInt(innerGame.getString("p1score")),
                         Integer.parseInt(innerGame.getString("p2score")), Integer.parseInt(innerGame.getString("ingoranciaScore")), Boolean.valueOf(innerGame.getString("p1turn")),
-                        innerP1.getString("id"), innerP2.getString("id"));
+                        innerP1.getString("id"), innerP2.getString("id"),id_user);
 
                 juegos.add(j);
             }
@@ -80,9 +92,26 @@ public class JuegoActivity extends ListActivity {
         it.putExtra("id_user", id_user);
         it.putExtra("id_juego",juego.getId());
 
+        if((juego.getTurno()&&id_user.equals(juego.getId_p1())||(!juego.getTurno()&&id_user.equals(juego.getId_p2())))){
+            startActivityForResult(it, ruletaActivity.SCORE_UPDATE_REQUEST);
+        }else{
+            Toast.makeText(JuegoActivity.this, "Aún no es tu turno", Toast.LENGTH_LONG).show();
+        }
 
-        this.startActivity(it);
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(resultCode == RESULT_OK)
+        {
+            if(requestCode == ruletaActivity.SCORE_UPDATE_REQUEST)
+            {
+                int puntos = 0;
+                data.getIntExtra("PUNTOS", puntos);
+                juego.setScorep1(juego.getScorep1() + puntos);
+            }
+        }
     }
 
     //Conexion a servicio

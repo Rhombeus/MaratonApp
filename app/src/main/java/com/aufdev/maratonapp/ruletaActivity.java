@@ -11,8 +11,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.loopj.android.http.TextHttpResponseHandler;
+
 import java.util.Random;
 
+import cz.msebera.android.httpclient.Header;
 import maraton.Dado;
 
 public class ruletaActivity extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class ruletaActivity extends AppCompatActivity {
     private Button finalizar;
     private int arr[] = {400, 335, 270, 205, 140, 75};
     private Juego juego;
+    private  int puntos = 0;
     private String id_juego;
     public static final int SCORE_UPDATE_REQUEST = 0;
     private String id_user;
@@ -45,14 +49,14 @@ public class ruletaActivity extends AppCompatActivity {
         id_user = it.getStringExtra("id_user");
         System.out.println("************RA: user"+id_user);
 
-        if(!turno){
+        /*if(!turno){
             girar.setEnabled(false);
             finalizar.setEnabled(false);
         }else{
             girar.setEnabled(true);
             finalizar.setEnabled(true);
 
-        }
+        }*/
 
         juego = new Juego(player1, player2, scorep1, scorep2, score_ignorancia, turno);
     }
@@ -102,9 +106,11 @@ public class ruletaActivity extends AppCompatActivity {
             {
                 //TODO : Checar qué jugador respondió, de manera que se actualice el score del jugador correcto
                 //Por el momento, solamente se actualiza el de player1. Se compara el
-                int puntos = 0; //En lugar de int, JSONObject y de ahí jalas todo.
+                //En lugar de int, JSONObject y de ahí jalas todo.
                 data.getIntExtra("puntos", puntos);
                 juego.setScorep1(juego.getScorep1() +  puntos);
+                finish();
+
 
 
             }
@@ -113,6 +119,26 @@ public class ruletaActivity extends AppCompatActivity {
 
     public void finalizarBtn(View v){
         //IR A VISTA DE PERDER O GANAR O SOLO TU SCORE
+        MaratonClient.post("games/delete/" + id_juego, null, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                if(statusCode==302){
+                    onSuccess(200,headers,responseString);
+                }else{
+                System.out.println("games/delete/" + id_juego);
+                System.out.println(statusCode);
+                System.out.println("No se borro");
+                }
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+               finish();
+            }
+        });
+        Intent it = new Intent();
+        it.putExtra("PUNTOS", puntos);
+        setResult(RESULT_OK, it);
         finish();
     }
 }

@@ -76,8 +76,13 @@ public class RegisterActivity extends AppCompatActivity {
             MaratonClient.post("users/add", params, new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    System.out.println("Error");
-                    Toast.makeText(RegisterActivity.this, "Falló la conexión", Toast.LENGTH_LONG).show();
+                    if(statusCode==302){
+                        onSuccess(statusCode,headers,responseString);
+                    }else {
+                        System.out.println("Error");
+                        Toast.makeText(RegisterActivity.this, "Falló la conexión", Toast.LENGTH_LONG).show();
+                        System.out.println("***SC:_ " + statusCode);
+                    }
                 }
 
                 @Override

@@ -22,6 +22,7 @@ public class ruletaActivity extends AppCompatActivity {
     private int arr[] = {400, 335, 270, 205, 140, 75};
     private Juego juego;
     public static final int SCORE_UPDATE_REQUEST = 0;
+    private String id_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,16 @@ public class ruletaActivity extends AppCompatActivity {
         String player1 = it.getStringExtra("player1");
         String player2 = it.getStringExtra("player2");
         Boolean turno = it.getBooleanExtra("turno", false);
+        id_user = it.getStringExtra(id_user);
+
+        if(!turno){
+            girar.setEnabled(false);
+            finalizar.setEnabled(false);
+        }else{
+            girar.setEnabled(true);
+            finalizar.setEnabled(true);
+
+        }
 
         juego = new Juego(player1, player2, scorep1, scorep2, score_ignorancia, turno);
     }
@@ -69,6 +80,7 @@ public class ruletaActivity extends AppCompatActivity {
                 finalizar.setEnabled(true);
                 Intent it = new Intent(ruletaActivity.this, PreguntaActivity.class);
                 it.putExtra("Categoria", categoria);
+                it.putExtra("id_user", id_user);
                 startActivityForResult(it, SCORE_UPDATE_REQUEST); //startActivityForResult
                 //RuletaActivity.this.finish();
             }

@@ -14,6 +14,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +31,11 @@ public class PreguntaActivity extends AppCompatActivity {
     private RadioButton opnARadioButton, opnBRadioButton, opnCRadioButton;
     private RadioGroup opnRadioGroup;
     private ProgressDialog progressDialog;
+    private String id_user;
+    private int  categoria;
+    private String id_pregunta;
+    private String indice_respuesta;
+    private String id_juego;
 
 
     @Override
@@ -44,7 +50,8 @@ public class PreguntaActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading data...");
         progressDialog.show();
-
+        id_user = getIntent().getStringExtra("id_user");
+        categoria = getIntent().getIntExtra("Categoria", 1);
         questionTextView.setText("");
         opnARadioButton.setText("Cargando...");
         opnBRadioButton.setText("Cargando...");
@@ -52,7 +59,7 @@ public class PreguntaActivity extends AppCompatActivity {
 
         try
         {
-            obtainPregunta(getIntent().getIntExtra("Categoria", 1));
+            obtainPregunta(categoria);
         }catch(JSONException ex)
         {
             ex.printStackTrace();
@@ -72,11 +79,12 @@ public class PreguntaActivity extends AppCompatActivity {
 
     private void obtainPregunta(final int cat) throws JSONException
     {
+        /*
         Random r = new Random();
-        int categoria = Math.abs(r.nextInt() % 6);//descartar 0
+        //int categoria = Math.abs(r.nextInt() % 6);//descartar 0
         if(categoria == 0){
             categoria+=1;
-        }
+        }*/
 
 
         MaratonRestClient client = new MaratonRestClient();
@@ -119,6 +127,7 @@ public class PreguntaActivity extends AppCompatActivity {
                 resp = 2;
                 break;
         }
+
         if (pregunta.accion(resp)) {
             Toast.makeText(this, "Correcto!", Toast.LENGTH_LONG).show();
             this.custom_end_activity();
@@ -133,12 +142,22 @@ public class PreguntaActivity extends AppCompatActivity {
     {
         int puntos = 0;
         //id_usuario, id_pregunta, #respuesta, id_juego -> query
-        MaratonClient client = new MaratonClient();
+        MaratonClient.get("questions/validateAnswer/" + id_user + "/" + id_pregunta + "/" + indice_respuesta + "/" + id_juego, null, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
-        //dentro del onSuccess()
-            //actualizar puntos
-            //setResult(ruletaActivity.SCORE_UPDATE_REQUEST, puntos);
-            //finish(); -> dentro del onSuccess()
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                //dentro del onSuccess()
+                //actualizar puntos
+                //setResult(ruletaActivity.SCORE_UPDATE_REQUEST, puntos);
+                //finish(); -> dentro del onSuccess()
+            }
+        });
+
+
     }
 
     public void skipBtnOnclick(View v) {

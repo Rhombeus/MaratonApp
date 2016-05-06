@@ -77,6 +77,8 @@ public class JuegoActivity extends ListActivity {
         it.putExtra("player2", juego.getId_p2());
         it.putExtra("score_ignorancia", juego.getScore_ignorancia());
         it.putExtra("turno", juego.getTurno());
+        it.putExtra("id_user", id_user);
+
 
         this.startActivity(it);
 

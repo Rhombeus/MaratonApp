@@ -24,6 +24,7 @@ public class MainMenuActivity extends Activity {
         username = getIntent().getStringExtra("username");
         System.out.println("***UserName: " + username);
         userid =  getIntent().getStringExtra("userid");
+        System.out.println(userid);
 
     }
 

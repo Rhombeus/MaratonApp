@@ -36,7 +36,7 @@ public class JuegoActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juegos);
         id_user = getIntent().getStringExtra("userid");
-
+        System.out.println("JuegosActivity--------usr---"+id_user);
         try {
             getJuegos();
         } catch (JSONException e) {
@@ -53,7 +53,7 @@ public class JuegoActivity extends ListActivity {
                 JSONObject innerGame = jsonObjectDos.getJSONObject("Game");
                 JSONObject innerP1 = jsonObjectDos.getJSONObject("player1");
                 JSONObject innerP2 = jsonObjectDos.getJSONObject("player2");
-                Juego j = new Juego(innerP1.getString("username"), innerP2.getString("username"), Integer.parseInt(innerGame.getString("p1score")),
+                Juego j = new Juego(innerGame.getString("id"),innerP1.getString("username"), innerP2.getString("username"), Integer.parseInt(innerGame.getString("p1score")),
                         Integer.parseInt(innerGame.getString("p2score")), Integer.parseInt(innerGame.getString("ingoranciaScore")), Boolean.valueOf(innerGame.getString("p1turn")),
                         innerP1.getString("id"), innerP2.getString("id"));
 
@@ -78,6 +78,7 @@ public class JuegoActivity extends ListActivity {
         it.putExtra("score_ignorancia", juego.getScore_ignorancia());
         it.putExtra("turno", juego.getTurno());
         it.putExtra("id_user", id_user);
+        it.putExtra("id_juego",juego.getId());
 
 
         this.startActivity(it);

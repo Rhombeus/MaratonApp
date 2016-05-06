@@ -14,7 +14,7 @@ public class Juego {
     private int score_ignorancia;
     private boolean turno;
 
-    public Juego(String player1, String player2, int scorep1, int scorep2, int score_ignorancia, boolean turno, String id_p1, String id_p2) {
+    public Juego(String id, String player1, String player2, int scorep1, int scorep2, int score_ignorancia, boolean turno, String id_p1, String id_p2) {
         this.player1 = player1;
         this.player2 = player2;
         this.scorep1 = scorep1;
@@ -23,6 +23,7 @@ public class Juego {
         this.turno = turno;
         this.id_p1 = id_p1;
         this.id_p2 = id_p2;
+        this.id = id;
     }
 
     public Juego(String id_p1, String id_p2, int scorep1, int scorep2, int score_ignorancia, boolean turno) {

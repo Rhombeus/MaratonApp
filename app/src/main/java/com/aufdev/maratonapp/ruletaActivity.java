@@ -21,6 +21,7 @@ public class ruletaActivity extends AppCompatActivity {
     private Button finalizar;
     private int arr[] = {400, 335, 270, 205, 140, 75};
     private Juego juego;
+    private String id_juego;
     public static final int SCORE_UPDATE_REQUEST = 0;
     private String id_user;
 
@@ -40,7 +41,9 @@ public class ruletaActivity extends AppCompatActivity {
         String player1 = it.getStringExtra("player1");
         String player2 = it.getStringExtra("player2");
         Boolean turno = it.getBooleanExtra("turno", false);
-        id_user = it.getStringExtra(id_user);
+        id_juego=it.getStringExtra("id_juego");
+        id_user = it.getStringExtra("id_user");
+        System.out.println("************RA: user"+id_user);
 
         if(!turno){
             girar.setEnabled(false);
@@ -81,6 +84,8 @@ public class ruletaActivity extends AppCompatActivity {
                 Intent it = new Intent(ruletaActivity.this, PreguntaActivity.class);
                 it.putExtra("Categoria", categoria);
                 it.putExtra("id_user", id_user);
+
+                it.putExtra("id_juego",id_juego);
                 startActivityForResult(it, SCORE_UPDATE_REQUEST); //startActivityForResult
                 //RuletaActivity.this.finish();
             }

@@ -38,12 +38,13 @@ public class TarjetaJsonAdapter {
         try {
             Random r = new Random();
 
-            JSONObject pregunta = arr.getJSONObject(r.nextInt() % arr.length());
+            JSONObject pregunta = arr.getJSONObject(Math.abs(r.nextInt() % arr.length()));
+            String id_pregunta=pregunta.getJSONObject("Question").getString("id");
             String texto = pregunta.getJSONObject("Question").getString("question_text");
             String categoria = pregunta.getJSONObject("Category").getString("description");
             int respuestaCorrecta = pregunta.getJSONObject("Question").getInt("correct");
 
-            JSONArray opcionesArr = pregunta.getJSONArray("Answer");
+            JSONArray opcionesArr = pregunta.getJSONArray("respuestas");
             String[] opciones = new String[opcionesArr.length()];
 
             JSONObject temp;
@@ -55,7 +56,7 @@ public class TarjetaJsonAdapter {
             }
 
             TarjetaFactory tarjetaFactory = new TarjetaFactory();
-            ret = (Tarjeta) tarjetaFactory.crearItem("", categoria, texto, opciones, respuestaCorrecta);
+            ret = (Tarjeta) tarjetaFactory.crearItem(id_pregunta, categoria, texto, opciones, respuestaCorrecta);
 
         } catch (JSONException e) {
             e.printStackTrace();

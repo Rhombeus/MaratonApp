@@ -16,6 +16,8 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import junit.runner.Version;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -51,6 +53,9 @@ public class PreguntaActivity extends AppCompatActivity {
         progressDialog.setTitle("Loading data...");
         progressDialog.show();
         id_user = getIntent().getStringExtra("id_user");
+        System.out.println("tarjeta-------------------usr-----------"+ id_user);
+
+        id_juego= getIntent().getStringExtra("id_juego");
         categoria = getIntent().getIntExtra("Categoria", 1);
         questionTextView.setText("");
         opnARadioButton.setText("Cargando...");
@@ -79,12 +84,12 @@ public class PreguntaActivity extends AppCompatActivity {
 
     private void obtainPregunta(final int cat) throws JSONException
     {
-        /*
+
         Random r = new Random();
         //int categoria = Math.abs(r.nextInt() % 6);//descartar 0
         if(categoria == 0){
             categoria+=1;
-        }*/
+        }
 
 
         MaratonRestClient client = new MaratonRestClient();
@@ -95,8 +100,11 @@ public class PreguntaActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray arr) {
+                System.out.println(arr);
                 Tarjeta preg = TarjetaJsonAdapter.jsonArrayToTarjeta(arr);
+                System.out.println("******************************************************preg"+preg);
                 if(preg != null) {
+                    id_pregunta=preg.getImagen();
                     progressDialog.dismiss();
                     PreguntaActivity.this.pregunta = preg;
                     questionTextView.setText(PreguntaActivity.this.pregunta.getPregunta());
@@ -145,15 +153,20 @@ public class PreguntaActivity extends AppCompatActivity {
         MaratonClient.get("questions/validateAnswer/" + id_user + "/" + id_pregunta + "/" + indice_respuesta + "/" + id_juego, null, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                System.out.println("-------------------------------------Error-----------------------------------------");
+                System.out.println(statusCode);
+                System.out.println("questions/validateAnswer/" + id_user + "/" + id_pregunta + "/" + indice_respuesta + "/" + id_juego);
 
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                //dentro del onSuccess()
-                //actualizar puntos
-                //setResult(ruletaActivity.SCORE_UPDATE_REQUEST, puntos);
-                //finish(); -> dentro del onSuccess()
+                System.out.println("------------------------------"+responseString);
+                if(responseString.equals("true")){
+
+                }else{
+
+                }
             }
         });
 
